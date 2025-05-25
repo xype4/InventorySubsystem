@@ -1,4 +1,5 @@
 using UnrealBuildTool;
+using System.IO;
 
 public class InventorySystemEditor : ModuleRules
 {
@@ -6,24 +7,66 @@ public class InventorySystemEditor : ModuleRules
     {
         PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 
+        PublicIncludePaths.AddRange(
+            new string[]
+            {
+                //"Core",
+            }
+        );
+
+        PrivateIncludePaths.AddRange(
+             new string[]
+             {
+             }
+            );
+
         PublicDependencyModuleNames.AddRange(
             new string[]
             {
-                "Core", //  Обычно нужен, если не был добавлен ранее
+                "Core",
+                "Engine",
+                "CoreUObject",
+                "InputCore",
+                "UnrealEd",
+
+                "Slate",
+                "SlateCore",
+                "AssetTools",
+                "ToolMenus",
+                "EditorWidgets",
+                "Blutility",
+                "UMG",
+                "UMGEditor",
+                "GraphEditor",
+                "DetailCustomizations",
+
+                "PropertyEditor",
+                "InventorySystem",
+                "DataTableEditor",
+                "LevelEditor",
+                "EditorStyle",
+                "AssetTools",
+                "EditorWidgets",
+                "BlueprintGraph",
+                "AnimGraph",
+                "ComponentVisualizers",
             }
         );
+
+        PrivateIncludePaths.Add("Resources");                                        
+        AddEngineThirdPartyPrivateStaticDependencies(Target, "zlib");
 
         PrivateDependencyModuleNames.AddRange(
             new string[]
             {
-                "CoreUObject",
-                "Engine",
-                "Slate",
-                "SlateCore",
-                "UnrealEd", // Необходимо для редакторских функций
-                "PropertyEditor", // Для отображения свойств в редакторе
-                "InventorySystem", // Зависимость от основного модуля
-                "DataTableEditor",
+                
+            }
+        );
+
+        DynamicallyLoadedModuleNames.AddRange(
+            new string[]
+            {
+                // ... добавьте любые модули, которые ваш модуль загружает динамически ...
             }
         );
     }

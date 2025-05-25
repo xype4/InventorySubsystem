@@ -6,7 +6,7 @@
 #include "Components/ActorComponent.h"
 #include "CPP_Item.h"
 #include "FL_ItemHelper.h"
-#include "Engine/DataTable.h"
+#include "DA_Item.h"
 
 #include "CPP_InventoryComponent.generated.h"
 
@@ -38,10 +38,6 @@ public:
 
 public:
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Config", meta = (ToolTip = "База данных предметов"))
-		UDataTable* ItemsDataTable;
-
-
 	UPROPERTY(EditAnywhere, Category = "Config", meta = (ClampMin = "1", UIMin = "1", ToolTip = "Базовое количество слотов в инвентаре"))
 		int SlotsCount = 1;
 
@@ -54,24 +50,24 @@ private:
 
 public:
 
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Public|Get", meta = (ToolTip = "Получение количества слотов инвентарного компонента"))
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "InventoryComponent|Get", meta = (ToolTip = "Получение количества слотов инвентарного компонента"))
 		const int GetSlotsCount();
 
-	UFUNCTION(BlueprintCallable, Category = "Public|Set", meta = (ToolTip = "Установка нового количества слотов инвентаря с обработкой переполнения", ExpandEnumAsExecs = "isOverflowed"))
+	UFUNCTION(BlueprintCallable, Category = "InventoryComponent|Set", meta = (ToolTip = "Установка нового количества слотов инвентаря с обработкой переполнения", ExpandEnumAsExecs = "isOverflowed"))
 		TArray<FItemInstance> SetSlotsCount(const int NewCount, EWhenInventuryOverflow& isOverflowed);
 
-	UFUNCTION(BlueprintCallable, Category = "Public", meta = (ToolTip = "Добавление нового предмета в инвентарь", ExpandEnumAsExecs = "isOverflowed"))
+	UFUNCTION(BlueprintCallable, Category = "InventoryComponent", meta = (ToolTip = "Добавление нового предмета в инвентарь", ExpandEnumAsExecs = "isOverflowed"))
 		FItemInstance AddItem(const FItemInstance Item, EWhenInventuryOverflow& isOverflowed);
 
-	UFUNCTION(BlueprintCallable, Category = "Public", meta = (ToolTip = "Удаление конкретного предмета из инвентаря. Возвращает флаг были ли удалены предметы в запрашеваемом количестве"))
+	UFUNCTION(BlueprintCallable, Category = "InventoryComponent", meta = (ToolTip = "Удаление конкретного предмета из инвентаря. Возвращает флаг были ли удалены предметы в запрашеваемом количестве"))
 		bool RemoveItemByInstance(const FItemInstance Item);
 
-	UFUNCTION(BlueprintCallable, Category = "Public", meta = (ToolTip = "Удаление любого предмета из инвентаря с совпадающим ID. Возвращает флаг были ли удалены предметы в запрашеваемом количестве"))
+	UFUNCTION(BlueprintCallable, Category = "InventoryComponent", meta = (ToolTip = "Удаление любого предмета из инвентаря с совпадающим ID. Возвращает флаг были ли удалены предметы в запрашеваемом количестве"))
 		bool RemoveItemByID(int id, int count);
 
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Public|Get", meta = (ToolTip = "Получение предметов из инвентаря"))
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "InventoryComponent|Get", meta = (ToolTip = "Получение предметов из инвентаря"))
 		const TArray<FItemInstance> GetItems();
 
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Public|Get", meta = (ToolTip = "Получение предметов из инвентаря с заданной категирией"))
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "InventoryComponent|Get", meta = (ToolTip = "Получение предметов из инвентаря с заданной категирией"))
 		const TArray<FItemInstance> GetItemsByCategory(const EItemCategory Category);
 };

@@ -92,25 +92,12 @@ bool UFL_ItemHelper::ItemEffectsIsIqual(const TArray<FEffectStatus>& FirstEffect
 	return true;
 }
 
-void UFL_ItemHelper::GetItemByID(const int ID, const UDataTable* ItemsDB, EExecResult& OutResult, FItemAbstract& Item)
+void UFL_ItemHelper::GetItemByID(const int ID, const UDA_Item* ItemsDA, EExecResult& OutResult, FItemAbstract& Item)
 {
-	if (ItemsDB)
+	if (ItemsDA)
 	{
-		for (auto RowIter : ItemsDB->GetRowMap())
-		{
-			FName RowName = RowIter.Key;
-			FItemAbstract* CurrentItem = ItemsDB->FindRow<FItemAbstract>(RowName, FString(""));
-
-			if (CurrentItem)
-			{
-				if (CurrentItem->ItemID == ID)
-				{
-					OutResult = EExecResult::Valid;
-					Item = *CurrentItem;
-					return;
-				}
-			}
-		}
+		OutResult = EExecResult::Valid;
+		Item = ItemsDA->Items[ID];
 	}
 
 	OutResult = EExecResult::NotValid;

@@ -4,12 +4,31 @@
 
 #include "CoreMinimal.h"
 #include "Modules/ModuleManager.h"
+#include "LevelEditor.h"
+#include "Framework/Commands/Commands.h"
+#include "Framework/Commands/UICommandList.h"
+
+
 
 class FInventorySystemEditorModule : public IModuleInterface
 {
 public:
-
-	/** IModuleInterface implementation */
 	virtual void StartupModule() override;
 	virtual void ShutdownModule() override;
+
+	virtual void AddModuleListeners() {};
+
+	
+
+protected:
+
+	void AddToolbarButton(FToolBarBuilder& Builder);
+	TSharedRef<FExtender> OnExtendLevelEditorToolbar(const TSharedRef<FUICommandList>& CommandList);
+
+	TSharedPtr<FUICommandList> PluginCommands;
+	TSharedPtr<FExtender> ToolbarExtender; 
+
+private:
+	void CreateItemEditorButton();
+	void CreateSlateStyle();
 };

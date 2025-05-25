@@ -206,10 +206,10 @@ struct INVENTORYSYSTEM_API FItemAbstract: public FTableRowBase
 			FText ItemDescription;
 
 		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Main", meta = (ToolTip = "Масса предмета"))
-			FText ItemMass;
+			float ItemMass;
 
 		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Main", meta = (ToolTip = "Стоимость предмета"))
-			float Price;
+			float ItemPrice;
 
 		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Main", meta = (ToolTip = "Возможность выкинуть"))
 			bool bCanDrop;
@@ -241,11 +241,12 @@ struct INVENTORYSYSTEM_API FItemAbstract: public FTableRowBase
 			TArray<FEquipmetUpgrades> ItemUpgrades;
 
 
-		UPROPERTY(BlueprintReadWrite, BlueprintReadWrite, Category = "Mesh", meta = (ToolTip = "Меш предмета"))
+		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Mesh", meta = (ToolTip = "Меш предмета"))
 			TSoftObjectPtr<UStaticMesh> Mesh;
 
-		UPROPERTY(BlueprintReadWrite, BlueprintReadWrite, Category = "Mesh", meta = (ToolTip = "Материал предмета"))
+		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Mesh", meta = (ToolTip = "Материал предмета"))
 			TSoftObjectPtr<UMaterial> UMaterialInterface;
+
 };
 
 

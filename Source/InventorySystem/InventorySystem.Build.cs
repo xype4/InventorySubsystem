@@ -1,6 +1,7 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 using UnrealBuildTool;
+using System.IO;
 
 public class InventorySystem : ModuleRules
 {
@@ -17,11 +18,13 @@ public class InventorySystem : ModuleRules
 		
 		PrivateIncludePaths.AddRange(
 			new string[] {
-				// ... add other private include paths required here ...
+				
 			}
 			);
-			
-		
+
+		PrivateIncludePaths.Add(Path.Combine(EngineDirectory, "Source/Editor/Blutility/Private"));
+
+
 		PublicDependencyModuleNames.AddRange(
 			new string[]
 			{

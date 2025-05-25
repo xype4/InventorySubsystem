@@ -6,7 +6,7 @@
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "CPP_Item.h"
 #include "Engine/AssetManager.h"
-#include "Engine/DataTable.h"
+#include "DA_Item.h"
 
 #include "FL_ItemHelper.generated.h"
 
@@ -41,7 +41,7 @@ class INVENTORYSYSTEM_API UFL_ItemHelper : public UBlueprintFunctionLibrary
 			static bool ItemEffectsIsIqual(const TArray<FEffectStatus>& FirstEffects, const TArray<FEffectStatus>& SecondEffects);
 
 		UFUNCTION(BlueprintCallable, Category = "ItemsHelper", meta = (ToolTip = "Получить предмет из базы данных по ИД", ExpandEnumAsExecs = "OutResult"))
-			static void GetItemByID(const int ID, const UDataTable* ItemsDB, EExecResult& OutResult, FItemAbstract& Item);
+			static void GetItemByID(const int ID, const UDA_Item* ItemsDA, EExecResult& OutResult, FItemAbstract& Item);
 
 };
 			

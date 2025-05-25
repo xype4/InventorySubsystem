@@ -14,12 +14,6 @@ void UCPP_InventoryComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	if (ItemsDataTable == nullptr)
-	{
-		
-		UE_LOG(LogTemp, Error, TEXT("База данных предметов не задана для %s"), *GetOwner()->GetName());
-	}
-
 }
 
 
@@ -64,13 +58,12 @@ TArray<FItemInstance> UCPP_InventoryComponent::SetSlotsCount(const int NewCount,
 
 FItemInstance UCPP_InventoryComponent::AddItem(const FItemInstance Item, EWhenInventuryOverflow& isOverflowed)
 {
-	if (ItemsDataTable != nullptr)
-	{
-		int CountToAdd = Item.Count;
 
-		//Попытка добавить к существующим стакам
-		for (int i = 0; i < Items.Num(); i++) {
-			if (Items[i].ItemAbstract.ItemID == Item.ItemAbstract.ItemID)
+	int CountToAdd = Item.Count;
+
+	//Попытка добавить к существующим стакам
+	for (int i = 0; i < Items.Num(); i++) {
+		if (Items[i].ItemAbstract.ItemID == Item.ItemAbstract.ItemID)
 			{
 				if (UFL_ItemHelper::ItemsEqual(Items[i].ItemAbstract, Item.ItemAbstract) == EItemsEqual::FullEqual)
 				{
@@ -90,8 +83,8 @@ FItemInstance UCPP_InventoryComponent::AddItem(const FItemInstance Item, EWhenIn
 						}
 					}							
 				}
-			}
 		}
+	}
 
 		//Попытка добавить в пустые ячейки
 		while(CountToAdd > 0)
@@ -117,12 +110,7 @@ FItemInstance UCPP_InventoryComponent::AddItem(const FItemInstance Item, EWhenIn
 		}
 		isOverflowed = EWhenInventuryOverflow::Exec;
 		return FItemInstance();
-	}
-	else
-	{
-		isOverflowed = EWhenInventuryOverflow::Error;
-		return FItemInstance();
-	}
+
 }
 
 bool UCPP_InventoryComponent::RemoveItemByInstance(const FItemInstance Item)
