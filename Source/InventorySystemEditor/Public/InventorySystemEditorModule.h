@@ -16,19 +16,6 @@ public:
 	virtual void StartupModule() override;
 	virtual void ShutdownModule() override;
 
-	virtual void AddModuleListeners() {};
-
-	
-
-protected:
-
-	void AddToolbarButton(FToolBarBuilder& Builder);
-	TSharedRef<FExtender> OnExtendLevelEditorToolbar(const TSharedRef<FUICommandList>& CommandList);
-
-	TSharedPtr<FUICommandList> PluginCommands;
-	TSharedPtr<FExtender> ToolbarExtender; 
-
 private:
-	void CreateItemEditorButton();
-	void CreateSlateStyle();
+	void RegisterMenuExtensions();
 };

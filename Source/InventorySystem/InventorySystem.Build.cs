@@ -41,6 +41,7 @@ public class InventorySystem : ModuleRules
 				"Engine",
 				"Slate",
 				"SlateCore",
+                "UMGEditor",
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);

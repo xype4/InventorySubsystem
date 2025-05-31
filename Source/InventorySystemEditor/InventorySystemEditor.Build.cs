@@ -28,17 +28,20 @@ public class InventorySystemEditor : ModuleRules
                 "CoreUObject",
                 "InputCore",
                 "UnrealEd",
+                "InventorySystem",
 
-                "Slate",
-                "SlateCore",
-                "AssetTools",
-                "ToolMenus",
-                "EditorWidgets",
-                "Blutility",
-                "UMG",
                 "UMGEditor",
-                "GraphEditor",
-                "DetailCustomizations",
+                "UnrealEd", // Обязательно для Editor модулей
+                "Slate",       // Интерфейс редактора
+                "SlateCore",   // Интерфейс редактора
+                "EditorStyle", // Стили редактора
+                "InputCore",
+                "CoreUObject",
+                "Engine",
+                "Projects",   //Для использования IPluginManager
+                "ToolMenus",
+                "Blutility",
+
 
                 "PropertyEditor",
                 "InventorySystem",

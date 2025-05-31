@@ -18,23 +18,23 @@ class INVENTORYSYSTEM_API UDA_Item : public UDataAsset
 	
 public:
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Config")
 		TArray<FItemAbstract> Items;
 
 	TArray<FItemAbstract>* GetItemsP();
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "ItemsDataAsset")
 		void AddNewItem();
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "ItemsDataAsset")
 		bool RemoveItem(int id);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "ItemsDataAsset")
 		bool GetItem(int id, FItemAbstract& Item);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "ItemsDataAsset")
 		bool ReplaceItemByID(FItemAbstract NewItem);
 
-	UFUNCTION(BlueprintCallable, BlueprintPure)
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "ItemsDataAsset")
 		void GetItems(TArray<FItemAbstract>& ItemsRef);
 };

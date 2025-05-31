@@ -65,7 +65,7 @@ EItemsUpgradeEqual UFL_ItemHelper::ItemsUpgradeEqual(const FEquipmetUpgrades& Fi
 
 bool UFL_ItemHelper::ItemIsUpgraded(const FItemAbstract& Item, TArray<FEquipmetUpgrades>& ItemUpgrades)
 {
-	return false;
+	return ItemUpgrades.Num() >= 1;
 }
 
 bool UFL_ItemHelper::ItemEffectsIsIqual(const TArray<FEffectStatus>& FirstEffects, const TArray<FEffectStatus>& SecondEffects)

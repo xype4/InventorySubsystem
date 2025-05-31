@@ -1,16 +1,16 @@
 #include "InventorySystemEditorModule.h"
-#include "Framework/Commands/Commands.h"
-#include "EditorStyleSet.h"
-#include "LevelEditor.h"
+#include "Modules/ModuleManager.h"
+#include "ToolMenus.h"
+#include "InventorySystemStyle.h"
 #include "Framework/MultiBox/MultiBoxBuilder.h"
 #include "Styling/SlateStyleRegistry.h"
-#include "Styling/SlateStyle.h"
-#include "Styling/ISlateStyle.h"
-#include "Framework/Application/SlateApplication.h"
-#include "ItemEditorButton.h"
-#include "Styling/SlateIconFinder.h"
+#include "Interfaces/IPluginManager.h"
 
-
+#include "WidgetBlueprint.h"
+#include "Editor/Blutility/Public/IBlutilityModule.h"
+#include "Editor/Blutility/Classes/EditorUtilityWidget.h"
+#include "Editor/Blutility/Classes/EditorUtilityWidgetBlueprint.h"
+#include "Editor/Blutility/Public/EditorUtilitySubsystem.h"
 
 #define LOCTEXT_NAMESPACE "FInventorySystemEditorModule"
 
@@ -19,96 +19,57 @@ TSharedPtr<FSlateStyleSet> StyleSet;
 
 void FInventorySystemEditorModule::StartupModule()
 {
-	CreateSlateStyle();
-	CreateItemEditorButton();
+	FInventorySystemStyle::InitializeStyle();
+
+	UToolMenus::RegisterStartupCallback(FSimpleMulticastDelegate::FDelegate::CreateRaw(this, &FInventorySystemEditorModule::RegisterMenuExtensions));
 }
 
 void FInventorySystemEditorModule::ShutdownModule()
 {
-	FLevelEditorModule& LevelEditorModule = FModuleManager::LoadModuleChecked<FLevelEditorModule>("LevelEditor");
-	LevelEditorModule.GetToolBarExtensibilityManager()->RemoveExtender(ToolbarExtender);
+	FInventorySystemStyle::ShutdownStyle();
 
 
-	FItemEditorButton::Unregister();
+	UToolMenus::UnRegisterStartupCallback(this);
+	UToolMenus::UnregisterOwner(this);
 }
 
-void FInventorySystemEditorModule::AddToolbarButton(FToolBarBuilder& Builder)
+
+void FInventorySystemEditorModule::RegisterMenuExtensions()
 {
-	Builder.AddToolBarButton(
-		FItemEditorButton::Get().ItemEditorButtonCommand,
-		NAME_None,
-		FItemEditorButton::GetButtonName(),
-		FItemEditorButton::GetButtonTooltip(),
-		FItemEditorButton::GetButtonIcon());
-}
+	FToolMenuOwnerScoped OwnerScoped(this);
 
-TSharedRef<FExtender> FInventorySystemEditorModule::OnExtendLevelEditorToolbar(const TSharedRef<FUICommandList>& CommandList)
-{
-	TSharedRef<FExtender> Extender = MakeShareable(new FExtender());
+	UToolMenu* ToolbarMenu = UToolMenus::Get()->ExtendMenu(
+		"LevelEditor.LevelEditorToolBar.AssetsToolBar");
+	FToolMenuSection& ToolbarSection = ToolbarMenu->FindOrAddSection("File");
 
-	Extender->AddToolBarExtension(
-		"Settings", // Location
-		EExtensionHook::After,
-		CommandList,
-		FToolBarExtensionDelegate::CreateRaw(this, &FInventorySystemEditorModule::AddToolbarButton)
-	);
-
-	return Extender;
-}
-
-void FInventorySystemEditorModule::CreateItemEditorButton()
-{
-	FItemEditorButton::Register();
-
-	PluginCommands = MakeShareable(new FUICommandList);
-
-	PluginCommands->MapAction(
-		FItemEditorButton::Get().ItemEditorButtonCommand,
+	ToolbarSection.AddEntry(FToolMenuEntry::InitToolBarButton(
+		TEXT("ItemsEditor"),
 		FExecuteAction::CreateLambda([]()
 			{
-				FItemEditorButton::OnClickedButton();
+				UE_LOG(LogTemp, Log, TEXT("Try item editor open"));
+
+				auto findedPath = FSoftObjectPath("EditorUtilityWidgetBlueprint'/InventorySystem/ItemsEditor/EW_ItemsEditorNew.EW_ItemsEditorNew'");
+				if (UWidgetBlueprint* Blueprint = Cast<UWidgetBlueprint>(findedPath.TryLoad()))
+				{
+					if (Blueprint->GeneratedClass->IsChildOf(UEditorUtilityWidget::StaticClass()))
+					{
+						if (UEditorUtilityWidgetBlueprint* EditorWidget = Cast<UEditorUtilityWidgetBlueprint>(Blueprint))
+						{
+							UEditorUtilitySubsystem* EditorUtilitySubsystem = GEditor->GetEditorSubsystem<UEditorUtilitySubsystem>();
+							EditorUtilitySubsystem->SpawnAndRegisterTab(EditorWidget);
+						}
+					}
+				}
+				else
+				{
+					UE_LOG(LogTemp, Log, TEXT("Not find EditorWidget"));
+				}
+
 			}),
-		FCanExecuteAction());
-
-
-	FLevelEditorModule& LevelEditorModule = FModuleManager::LoadModuleChecked<FLevelEditorModule>("LevelEditor");
-
-	ToolbarExtender = MakeShareable(new FExtender);
-
-
-	FToolBarExtensionDelegate ToolbarDelegate;
-	ToolbarDelegate.BindLambda([this](FToolBarBuilder& Builder)
-		{
-			Builder.AddToolBarButton(
-				FItemEditorButton::Get().ItemEditorButtonCommand,
-				NAME_None,
-				FItemEditorButton::GetButtonName(),
-				FItemEditorButton::GetButtonTooltip(),
-				FItemEditorButton::GetButtonIcon());
-		});
-
-	ToolbarExtender->AddToolBarExtension(
-		"Settings",
-		EExtensionHook::After,
-		PluginCommands,
-		ToolbarDelegate
-	);
-
-	LevelEditorModule.GetToolBarExtensibilityManager()->AddExtender(ToolbarExtender);
-}
-
-void FInventorySystemEditorModule::CreateSlateStyle()
-{
-	StyleSet = MakeShareable(new FSlateStyleSet("InventoryPluginStyle"));
-	StyleSet->SetContentRoot(FPaths::ProjectPluginsDir() / "InventorySystem/Resources");
-
-	FString IconPath = StyleSet->RootToContentDir("ItemEditorIcon32", TEXT(".png"));
-
-	FSlateImageBrush* MyIconButtonBrush = new FSlateImageBrush(IconPath, FVector2D(32, 32));
-
-	StyleSet->Set("InventoryPlugin.ItemEditorIcon", MyIconButtonBrush);
-
-	FSlateStyleRegistry::RegisterSlateStyle(*StyleSet);
+		INVTEXT("Items Editor button"),
+		INVTEXT("Open Items editor "),
+		FSlateIcon(FInventorySystemStyle::GetStyleSetName(), "Inventory.MyImage")
+	));
 }
 
 #undef LOCTEXT_NAMESPACE
