@@ -21,7 +21,7 @@ enum class EItemCategory : uint8
 {
 	Weapon     UMETA(DisplayName = "Weapon"),
 	Armor      UMETA(DisplayName = "Armor"),
-	Artifact   UMETA(DisplayName = "Artifact"),
+	Accessory  UMETA(DisplayName = "Accessory"),
 	Potion     UMETA(DisplayName = "Potion"),
 	Book       UMETA(DisplayName = "Book"),
 	Other      UMETA(DisplayName = "Other")
@@ -60,7 +60,10 @@ enum class EItemType : uint8
 	Gloves		UMETA(DisplayName = "Gloves"),
 	Leg			UMETA(DisplayName = "Leg Armor"), 
 	Boots		UMETA(DisplayName = "Boots"),    
-	Accessory   UMETA(DisplayName = "Accessory") 
+	Neck		UMETA(DisplayName = "Neck"),
+	Ring		UMETA(DisplayName = "Ring"),
+	Nothing		UMETA(DisplayName = "Nothing"),
+	Shield		UMETA(DisplayName = "Shield")
 };
 
 /**
@@ -70,16 +73,11 @@ enum class EItemType : uint8
 UENUM(BlueprintType)
 enum class EItemSubType : uint8
 {
-	OneHand		UMETA(DisplayName = "OneHand"),
-	TwoHand			UMETA(DisplayName = "TwoHand"),
 	Heavy		UMETA(DisplayName = "Heavy"),
-	Light			UMETA(DisplayName = "Light"),
-	Medium		UMETA(DisplayName = "Medium"),
-	Necklace		UMETA(DisplayName = "Necklace"),
-	Ring		UMETA(DisplayName = "Ring"),
-	Other       UMETA(DisplayName = "Other")
+	Light		UMETA(DisplayName = "Light"),
+	Nothing		UMETA(DisplayName = "Nothing"),
+	Medium		UMETA(DisplayName = "Medium")
 };
-
 /**
  * @Типы эффектов, применимых к персонажу
  */
