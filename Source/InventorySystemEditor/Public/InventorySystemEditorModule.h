@@ -7,6 +7,8 @@
 #include "LevelEditor.h"
 #include "Framework/Commands/Commands.h"
 #include "Framework/Commands/UICommandList.h"
+#include "BlueprintEditorModule.h"
+#include "ToolMenus.h"
 
 
 
@@ -18,4 +20,5 @@ public:
 
 private:
 	void RegisterMenuExtensions();
+	void RegisterBlueprintMenuExtension();
 };

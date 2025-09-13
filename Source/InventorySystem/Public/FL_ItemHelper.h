@@ -53,6 +53,12 @@ class INVENTORYSYSTEM_API UFL_ItemHelper : public UBlueprintFunctionLibrary
 		UFUNCTION(BlueprintCallable, BlueprintPure, Category = "ItemsHelper", meta = (ToolTip = "Получить текст подтипа предмета"))
 			static FText GetItemSubTypeName(const EItemSubType& Category);
 
+		UFUNCTION(BlueprintCallable, BlueprintPure, Category = "ItemsHelper", meta = (ToolTip = "Получить список категирий предметов"))
+			static TArray<EItemCategory> GetItemCategories();
+
+		template <typename T>
+		static TArray<T> GetEnumList();
+
 		static FText ItemCategoryArmor;
 		static FText ItemCategoryBook;
 		static FText ItemCategoryOther;
@@ -79,4 +85,4 @@ class INVENTORYSYSTEM_API UFL_ItemHelper : public UBlueprintFunctionLibrary
 
 		static FText ItemCategoryNone;
 };
-			
+

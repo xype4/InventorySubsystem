@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+п»ї// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -13,7 +13,7 @@
 #include "CPP_Item.generated.h"
 
 /**
- * @Категрии предметов
+ * @РљР°С‚РµРіСЂРёРё РїСЂРµРґРјРµС‚РѕРІ
  */
 
 UENUM(BlueprintType)
@@ -45,7 +45,7 @@ enum class EItemsUpgradeEqual : uint8
 };
 
 /**
- * @Типы предметов
+ * @РўРёРїС‹ РїСЂРµРґРјРµС‚РѕРІ
  */
 
 UENUM(BlueprintType)
@@ -67,7 +67,7 @@ enum class EItemType : uint8
 };
 
 /**
- * @Подтипы
+ * @РџРѕРґС‚РёРїС‹
  */
 
 UENUM(BlueprintType)
@@ -79,46 +79,46 @@ enum class EItemSubType : uint8
 	Medium		UMETA(DisplayName = "Medium")
 };
 /**
- * @Типы эффектов, применимых к персонажу
+ * @РўРёРїС‹ СЌС„С„РµРєС‚РѕРІ, РїСЂРёРјРµРЅРёРјС‹С… Рє РїРµСЂСЃРѕРЅР°Р¶Сѓ
  */
 
 
 UENUM(BlueprintType)
 enum class EEffectStatusType : uint8
 {
-	// Основные типы
-	PhysicalDamage		UMETA(DisplayName = "PhysicalDamage"), // Физический урон (рубящий, дробящий, колющий)
-	MagicalDamage		UMETA(DisplayName = "MagicalDamage"),  // Магический урон (универсальный магический тип)
-	TrueDamage			UMETA(DisplayName = "TrueDamage"), // Игнорирует броню и сопротивления
+	// РћСЃРЅРѕРІРЅС‹Рµ С‚РёРїС‹
+	PhysicalDamage		UMETA(DisplayName = "PhysicalDamage"), // Р¤РёР·РёС‡РµСЃРєРёР№ СѓСЂРѕРЅ (СЂСѓР±СЏС‰РёР№, РґСЂРѕР±СЏС‰РёР№, РєРѕР»СЋС‰РёР№)
+	MagicalDamage		UMETA(DisplayName = "MagicalDamage"),  // РњР°РіРёС‡РµСЃРєРёР№ СѓСЂРѕРЅ (СѓРЅРёРІРµСЂСЃР°Р»СЊРЅС‹Р№ РјР°РіРёС‡РµСЃРєРёР№ С‚РёРї)
+	TrueDamage			UMETA(DisplayName = "TrueDamage"), // РРіРЅРѕСЂРёСЂСѓРµС‚ Р±СЂРѕРЅСЋ Рё СЃРѕРїСЂРѕС‚РёРІР»РµРЅРёСЏ
 
-	// Стихийный урон
-	FireDamage			UMETA(DisplayName = "FireDamage"),     // Огненный урон
-	IceDamage			UMETA(DisplayName = "IceDamage"),      // Ледяной урон
-	LightningDamage		UMETA(DisplayName = "LightningDamage"), // Электрический урон
-	PoisonDamage		UMETA(DisplayName = "PoisonDamage"),   // Ядовитый урон
-	BleedingDamage		UMETA(DisplayName = "BleedingDamage"),  // Кровотечение 
-	RadiantDamage		UMETA(DisplayName = "RadiantDamage"),  // Светлый урон
-	NecroticDamage      UMETA(DisplayName = "NecroticDamage"), // Некротический урон
+	// РЎС‚РёС…РёР№РЅС‹Р№ СѓСЂРѕРЅ
+	FireDamage			UMETA(DisplayName = "FireDamage"),     // РћРіРЅРµРЅРЅС‹Р№ СѓСЂРѕРЅ
+	IceDamage			UMETA(DisplayName = "IceDamage"),      // Р›РµРґСЏРЅРѕР№ СѓСЂРѕРЅ
+	LightningDamage		UMETA(DisplayName = "LightningDamage"), // Р­Р»РµРєС‚СЂРёС‡РµСЃРєРёР№ СѓСЂРѕРЅ
+	PoisonDamage		UMETA(DisplayName = "PoisonDamage"),   // РЇРґРѕРІРёС‚С‹Р№ СѓСЂРѕРЅ
+	BleedingDamage		UMETA(DisplayName = "BleedingDamage"),  // РљСЂРѕРІРѕС‚РµС‡РµРЅРёРµ 
+	RadiantDamage		UMETA(DisplayName = "RadiantDamage"),  // РЎРІРµС‚Р»С‹Р№ СѓСЂРѕРЅ
+	NecroticDamage      UMETA(DisplayName = "NecroticDamage"), // РќРµРєСЂРѕС‚РёС‡РµСЃРєРёР№ СѓСЂРѕРЅ
 
-	// Урон по характеристикам
-	StaminaDamage		UMETA(DisplayName = "StaminaDamage"),  // Урон по стамине
-	ManaDamage			UMETA(DisplayName = "ManaDamage"),     // Урон по мане
-	ForceDamage			UMETA(DisplayName = "ForceDamage"),     // Урон физ. силе
-	MagicDamage			UMETA(DisplayName = "MagicDamage"),     // Урон маг. силе
+	// РЈСЂРѕРЅ РїРѕ С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєР°Рј
+	StaminaDamage		UMETA(DisplayName = "StaminaDamage"),  // РЈСЂРѕРЅ РїРѕ СЃС‚Р°РјРёРЅРµ
+	ManaDamage			UMETA(DisplayName = "ManaDamage"),     // РЈСЂРѕРЅ РїРѕ РјР°РЅРµ
+	ForceDamage			UMETA(DisplayName = "ForceDamage"),     // РЈСЂРѕРЅ С„РёР·. СЃРёР»Рµ
+	MagicDamage			UMETA(DisplayName = "MagicDamage"),     // РЈСЂРѕРЅ РјР°Рі. СЃРёР»Рµ
 
-	// Положительные эффекты
-	ManaRecovery		UMETA(DisplayName = "ManaRecovery"),  // Восстановление маны
-	StaminaRecovery		UMETA(DisplayName = "StaminaRecovery"),  // Восстановление стамины
-	HealthRecovery		UMETA(DisplayName = "HealthRecovery"),  // Восстановление хп
+	// РџРѕР»РѕР¶РёС‚РµР»СЊРЅС‹Рµ СЌС„С„РµРєС‚С‹
+	ManaRecovery		UMETA(DisplayName = "ManaRecovery"),  // Р’РѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёРµ РјР°РЅС‹
+	StaminaRecovery		UMETA(DisplayName = "StaminaRecovery"),  // Р’РѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёРµ СЃС‚Р°РјРёРЅС‹
+	HealthRecovery		UMETA(DisplayName = "HealthRecovery"),  // Р’РѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёРµ С…Рї
 
-	ManaIncrease		UMETA(DisplayName = "ManaIncrease"),  // Повышение маны
-	StaminaIncrease		UMETA(DisplayName = "StaminaIncrease"),  // Повышение стамины
-	HealthIncrease		UMETA(DisplayName = "HealthIncrease"),  // Повышение хп
+	ManaIncrease		UMETA(DisplayName = "ManaIncrease"),  // РџРѕРІС‹С€РµРЅРёРµ РјР°РЅС‹
+	StaminaIncrease		UMETA(DisplayName = "StaminaIncrease"),  // РџРѕРІС‹С€РµРЅРёРµ СЃС‚Р°РјРёРЅС‹
+	HealthIncrease		UMETA(DisplayName = "HealthIncrease"),  // РџРѕРІС‹С€РµРЅРёРµ С…Рї
 
 };
 
 /**
- * @Структура, описывающая действие эффекта
+ * @РЎС‚СЂСѓРєС‚СѓСЂР°, РѕРїРёСЃС‹РІР°СЋС‰Р°СЏ РґРµР№СЃС‚РІРёРµ СЌС„С„РµРєС‚Р°
  */
 
 USTRUCT(BlueprintType)
@@ -127,16 +127,16 @@ struct INVENTORYSYSTEM_API FEffectStatus
 	GENERATED_BODY()
 
 	public:
-		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Config", meta = (ToolTip = "Тип эффекта"))
+		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Config", meta = (ToolTip = "РўРёРї СЌС„С„РµРєС‚Р°"))
 			EEffectStatusType EffectType;
 
-		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Config", meta = (ToolTip = "Вероятность вызвать эффект"))
+		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Config", meta = (ToolTip = "Р’РµСЂРѕСЏС‚РЅРѕСЃС‚СЊ РІС‹Р·РІР°С‚СЊ СЌС„С„РµРєС‚"))
 			float EffectProbability;
 
-		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Config", meta = (ToolTip = "Воздействие эффекта в секунду"))
+		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Config", meta = (ToolTip = "Р’РѕР·РґРµР№СЃС‚РІРёРµ СЌС„С„РµРєС‚Р° РІ СЃРµРєСѓРЅРґСѓ"))
 			float EffectPerSecond;
 
-		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Config", meta = (ToolTip = "Время эффекта"))
+		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Config", meta = (ToolTip = "Р’СЂРµРјСЏ СЌС„С„РµРєС‚Р°"))
 			float EffectTime;
 
 		bool operator==(const FEffectStatus& Other) const
@@ -156,7 +156,7 @@ struct INVENTORYSYSTEM_API FEffectStatus
 };
 
 /**
- * @Структура, описывающая улучшения экипировки (зачарования и ид)
+ * @РЎС‚СЂСѓРєС‚СѓСЂР°, РѕРїРёСЃС‹РІР°СЋС‰Р°СЏ СѓР»СѓС‡С€РµРЅРёСЏ СЌРєРёРїРёСЂРѕРІРєРё (Р·Р°С‡Р°СЂРѕРІР°РЅРёСЏ Рё РёРґ)
  */
 
 
@@ -167,25 +167,25 @@ struct INVENTORYSYSTEM_API FEquipmetUpgrades
 
 public:
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Config", meta = (ToolTip = "Название улучшения"))
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Config", meta = (ToolTip = "РќР°Р·РІР°РЅРёРµ СѓР»СѓС‡С€РµРЅРёСЏ"))
 		FText UpgradeName;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Main", meta = (ToolTip = "Описание улучшения", MultiLine = "true"))
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Main", meta = (ToolTip = "РћРїРёСЃР°РЅРёРµ СѓР»СѓС‡С€РµРЅРёСЏ", MultiLine = "true"))
 		FText UpgradeDescription;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Effects", meta = (ToolTip = "Пассивные эффекты (при экипировке)"))
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Effects", meta = (ToolTip = "РџР°СЃСЃРёРІРЅС‹Рµ СЌС„С„РµРєС‚С‹ (РїСЂРё СЌРєРёРїРёСЂРѕРІРєРµ)"))
 		TArray<FEffectStatus> UpgradePassiveEffects;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Effects", meta = (ToolTip = "Активные эффекты на ЦЕЛЬ (при использовании, атаке)"))
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Effects", meta = (ToolTip = "РђРєС‚РёРІРЅС‹Рµ СЌС„С„РµРєС‚С‹ РЅР° Р¦Р•Р›Р¬ (РїСЂРё РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРё, Р°С‚Р°РєРµ)"))
 		TArray<FEffectStatus> UpgradeActiveTargetEffects;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Effects", meta = (ToolTip = "Активные эффекты на СЕБЯ (при использовании, атаке)"))
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Effects", meta = (ToolTip = "РђРєС‚РёРІРЅС‹Рµ СЌС„С„РµРєС‚С‹ РЅР° РЎР•Р‘РЇ (РїСЂРё РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРё, Р°С‚Р°РєРµ)"))
 		TArray<FEffectStatus> UpgradeActiveSelfEffects;
 };
 
 
 /**
- * @Структура, описывающая абстрактный предмет предмет БЕЗ КОЛИЧЕСТВА
+ * @РЎС‚СЂСѓРєС‚СѓСЂР°, РѕРїРёСЃС‹РІР°СЋС‰Р°СЏ Р°Р±СЃС‚СЂР°РєС‚РЅС‹Р№ РїСЂРµРґРјРµС‚ РїСЂРµРґРјРµС‚ Р‘Р•Р— РљРћР›РР§Р•РЎРўР’Рђ
  */
 
 USTRUCT (BlueprintType)
@@ -194,62 +194,62 @@ struct INVENTORYSYSTEM_API FItemAbstract: public FTableRowBase
 	GENERATED_BODY()
 
 	public:
-		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Main", meta = (ClampMin = 0, UIMin = 0, ToolTip = "ID предмета"))
+		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Main", meta = (ClampMin = 0, UIMin = 0, ToolTip = "ID РїСЂРµРґРјРµС‚Р°"))
 			int ItemID;
 
-		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Main", meta = (ToolTip = "Название предмета"))
+		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Main", meta = (ToolTip = "РќР°Р·РІР°РЅРёРµ РїСЂРµРґРјРµС‚Р°"))
 			FText ItemName;
 
-		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Main", meta = (ToolTip = "Описание предмета", MultiLine = "true"))
+		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Main", meta = (ToolTip = "РћРїРёСЃР°РЅРёРµ РїСЂРµРґРјРµС‚Р°", MultiLine = "true"))
 			FText ItemDescription;
 
-		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Main", meta = (ToolTip = "Масса предмета"))
+		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Main", meta = (ToolTip = "РњР°СЃСЃР° РїСЂРµРґРјРµС‚Р°"))
 			float ItemMass;
 
-		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Main", meta = (ToolTip = "Стоимость предмета"))
+		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Main", meta = (ToolTip = "РЎС‚РѕРёРјРѕСЃС‚СЊ РїСЂРµРґРјРµС‚Р°"))
 			float ItemPrice;
 
-		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Main", meta = (ToolTip = "Возможность выкинуть"))
+		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Main", meta = (ToolTip = "Р’РѕР·РјРѕР¶РЅРѕСЃС‚СЊ РІС‹РєРёРЅСѓС‚СЊ"))
 			bool bCanDrop;
 
-		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Main", meta = (ToolTip = "Возможность использовать"))
+		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Main", meta = (ToolTip = "Р’РѕР·РјРѕР¶РЅРѕСЃС‚СЊ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ"))
 			bool bCanUse;
 
 
-		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Category", meta = (ToolTip = "Тип предмета"))
+		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Category", meta = (ToolTip = "РўРёРї РїСЂРµРґРјРµС‚Р°"))
 			EItemCategory ItemCategory;
 	
-		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Category", meta = (ToolTip = "Категория предмета"))
+		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Category", meta = (ToolTip = "РљР°С‚РµРіРѕСЂРёСЏ РїСЂРµРґРјРµС‚Р°"))
 			EItemType ItemType;
 
-		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Category", meta = (ToolTip = "Подкатегория предмета"))
+		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Category", meta = (ToolTip = "РџРѕРґРєР°С‚РµРіРѕСЂРёСЏ РїСЂРµРґРјРµС‚Р°"))
 			EItemSubType ItemSubType;
 
 
-		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Effects", meta = (ToolTip = "Пассивные эффекты (при экипировке)"))
+		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Effects", meta = (ToolTip = "РџР°СЃСЃРёРІРЅС‹Рµ СЌС„С„РµРєС‚С‹ (РїСЂРё СЌРєРёРїРёСЂРѕРІРєРµ)"))
 			TArray<FEffectStatus> ItemPassiveEffects;
 
-		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Effects", meta = (ToolTip = "Активные эффекты на ЦЕЛЬ (при использовании, атаке)"))
+		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Effects", meta = (ToolTip = "РђРєС‚РёРІРЅС‹Рµ СЌС„С„РµРєС‚С‹ РЅР° Р¦Р•Р›Р¬ (РїСЂРё РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРё, Р°С‚Р°РєРµ)"))
 			TArray<FEffectStatus> ItemActiveTargetEffects;
 
-		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Effects", meta = (ToolTip = "Активные эффекты на СЕБЯ (при использовании, атаке)"))
+		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Effects", meta = (ToolTip = "РђРєС‚РёРІРЅС‹Рµ СЌС„С„РµРєС‚С‹ РЅР° РЎР•Р‘РЇ (РїСЂРё РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРё, Р°С‚Р°РєРµ)"))
 			TArray<FEffectStatus> ItemActiveSelfEffects;
 
-		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Effects", meta = (ToolTip = "Улучшения на предмете"))
+		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Effects", meta = (ToolTip = "РЈР»СѓС‡С€РµРЅРёСЏ РЅР° РїСЂРµРґРјРµС‚Рµ"))
 			TArray<FEquipmetUpgrades> ItemUpgrades;
 
 
-		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Mesh", meta = (ToolTip = "Меш предмета"))
+		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Mesh", meta = (ToolTip = "РњРµС€ РїСЂРµРґРјРµС‚Р°"))
 			TSoftObjectPtr<UStaticMesh> Mesh;
 
-		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Mesh", meta = (ToolTip = "Материал предмета"))
-			TSoftObjectPtr<UMaterial> UMaterialInterface;
+		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Mesh", meta = (ToolTip = "РњР°С‚РµСЂРёР°Р» РїСЂРµРґРјРµС‚Р°"))
+			TSoftObjectPtr<UMaterialInstance> Material;
 
 };
 
 
 /**
- * @Структура, описывающая конкретынй предмет предмет С КОЛИЧЕСТВОМ в слоте
+ * @РЎС‚СЂСѓРєС‚СѓСЂР°, РѕРїРёСЃС‹РІР°СЋС‰Р°СЏ РєРѕРЅРєСЂРµС‚С‹РЅР№ РїСЂРµРґРјРµС‚ РїСЂРµРґРјРµС‚ РЎ РљРћР›РР§Р•РЎРўР’РћРњ РІ СЃР»РѕС‚Рµ
  */
 
 USTRUCT (BlueprintType)
@@ -258,10 +258,10 @@ struct INVENTORYSYSTEM_API FItemInstance
 	GENERATED_BODY()
 
 	public:
-		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Main", meta = (ToolTip = "Предмет"))
+		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Main", meta = (ToolTip = "РџСЂРµРґРјРµС‚"))
 			FItemAbstract ItemAbstract;
 
-		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Main", meta = (ClampMin = 0, UIMin = 0, ToolTip = "Количество предметов"))
+		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Main", meta = (ClampMin = 0, UIMin = 0, ToolTip = "РљРѕР»РёС‡РµСЃС‚РІРѕ РїСЂРµРґРјРµС‚РѕРІ"))
 			int Count;
 
 		FItemInstance(FItemAbstract ItemAbstractConstructor, int CountConstructor)

@@ -123,10 +123,16 @@ void UFL_ItemHelper::GetItemByID(const int ID, const UDA_Item* ItemsDA, EExecRes
 {
 	if (ItemsDA)
 	{
-		OutResult = EExecResult::Valid;
-		Item = ItemsDA->Items[ID];
+		for(auto const currentItem: ItemsDA->Items)
+		{
+			if(currentItem.ItemID == ID)
+			{
+				OutResult = EExecResult::Valid;
+				Item = currentItem;
+				return;
+			}
+		}
 	}
-
 	OutResult = EExecResult::NotValid;
 	Item = FItemAbstract();
 }
@@ -219,6 +225,27 @@ FText UFL_ItemHelper::GetItemSubTypeName(const EItemSubType& Category)
 	default:
 		return ItemCategoryNone;
 	}
+}
+
+template<typename T>
+inline TArray<T> UFL_ItemHelper::GetEnumList()
+{
+	TArray<T> AllEnumValues;
+	UEnum* Enum = StaticEnum<T>();
+	if (Enum)
+	{
+		for (int i = 0; i < Enum->NumEnums() - 1; i++)
+		{
+			T Value = static_cast<T>(Enum->GetValueByIndex(i));
+			AllEnumValues.Add(Value);
+		}
+	}
+	return AllEnumValues;
+}
+
+TArray<EItemCategory> UFL_ItemHelper::GetItemCategories()
+{
+	return GetEnumList<EItemCategory>();
 }
 
 

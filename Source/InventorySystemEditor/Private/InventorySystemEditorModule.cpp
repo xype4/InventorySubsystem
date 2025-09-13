@@ -22,6 +22,11 @@ void FInventorySystemEditorModule::StartupModule()
 	FInventorySystemStyle::InitializeStyle();
 
 	UToolMenus::RegisterStartupCallback(FSimpleMulticastDelegate::FDelegate::CreateRaw(this, &FInventorySystemEditorModule::RegisterMenuExtensions));
+	UToolMenus::RegisterStartupCallback(FSimpleMulticastDelegate::FDelegate::CreateRaw(this, &FInventorySystemEditorModule::RegisterBlueprintMenuExtension));
+
+
+	/*FBlueprintEditorModule& BlueprintEditorModule = FModuleManager::LoadModuleChecked<FBlueprintEditorModule>("Kismet");
+	BlueprintEditorModule.OnGatherBlueprintMenuExtensions().AddRaw(this, &FInventorySystemEditorModule::RegisterBlueprintMenuExtension);*/
 }
 
 void FInventorySystemEditorModule::ShutdownModule()
@@ -70,6 +75,28 @@ void FInventorySystemEditorModule::RegisterMenuExtensions()
 		INVTEXT("Open Items editor "),
 		FSlateIcon(FInventorySystemStyle::GetStyleSetName(), "Inventory.MyImage")
 	));
+}
+
+void FInventorySystemEditorModule::RegisterBlueprintMenuExtension()
+{
+	UToolMenu* ToolbarMenu = UToolMenus::Get()->ExtendMenu(
+		"GraphEditor.GraphNodeContextMenu.K2Node_CallFunction");
+	FToolMenuSection& ToolbarSection = ToolbarMenu->FindOrAddSection("Test");
+
+	/*ToolbarSection.AddEntry(FToolMenuEntry::InitWidget(
+
+	));*/
+	ToolbarSection.AddEntry(FToolMenuEntry::InitToolBarButton(
+		TEXT("ItemsEditor"),
+		FExecuteAction::CreateLambda([]()
+			{
+
+
+			}),
+			INVTEXT("Find in quest"),
+			INVTEXT("Find in quest"),
+			FSlateIcon(FName("EditorStyle"), "MainFrame.VisitSearchForAnswersPage")
+			));
 }
 
 #undef LOCTEXT_NAMESPACE
