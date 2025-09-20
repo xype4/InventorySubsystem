@@ -61,22 +61,36 @@ void ACPP_DroppedItem::OnConstruction(const FTransform& Transform)
 {
 	Super::OnConstruction(Transform);
 
-	if (!LoadedDataAsset)
-		LoadedDataAsset = Cast<UDA_Item>(StaticLoadObject(UDA_Item::StaticClass(), nullptr, TEXT("/InventorySystem/ItemsEditor/DA_ItemsData.DA_ItemsData")));
-
-	UFL_ItemHelper::GetItemByID(ID, LoadedDataAsset, IsValidItem, Item);
-
-	if(IsValidItem == EExecResult::Valid)
+	switch (ConstructType)
 	{
-		if (auto mesh = GetItemMesh())
-		{
-			StaticMesh->SetStaticMesh(mesh);
-		}
-		if (auto material = GetItemMaterial())
-		{
-			StaticMesh->SetMaterial(0, material);
-		}
+	case ECreateType::ByID:
+		
+		if (!LoadedDataAsset)
+			LoadedDataAsset = Cast<UDA_Item>(StaticLoadObject(UDA_Item::StaticClass(), nullptr, TEXT("/InventorySystem/ItemsEditor/DA_ItemsData.DA_ItemsData")));
+
+		UFL_ItemHelper::GetItemByID(ID, LoadedDataAsset, IsValidItem, Item);
+		break;
+
+	case ECreateType::ByItem:
+
+		ID = Item.ItemID;
+
+		break;
+
+	default:
+		break;
 	}
+
+	if (auto mesh = GetItemMesh())
+	{
+		StaticMesh->SetStaticMesh(mesh);
+	}
+
+	if (auto material = GetItemMaterial())
+	{
+		StaticMesh->SetMaterial(0, material);
+	}
+	
 
 	if(OverrideMesh)
 	{
@@ -87,6 +101,9 @@ void ACPP_DroppedItem::OnConstruction(const FTransform& Transform)
 		StaticMesh->SetMaterial(0, OverrideMaterial);
 	}
 	
+	StaticMesh->SetSimulatePhysics(EnablePhysicsOnStart);
+	StaticMesh->SetEnableGravity(EnablePhysicsOnStart);
+
 }
 
 FText ACPP_DroppedItem::GetObjectName()

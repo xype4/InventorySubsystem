@@ -9,6 +9,7 @@
 #include "Materials/MaterialInterface.h"
 #include "Materials/Material.h"
 #include "Engine/DataTable.h"
+#include "CPP_StatsComponent.h"
 
 #include "CPP_Item.generated.h"
 
@@ -78,82 +79,6 @@ enum class EItemSubType : uint8
 	Nothing		UMETA(DisplayName = "Nothing"),
 	Medium		UMETA(DisplayName = "Medium")
 };
-/**
- * @Типы эффектов, применимых к персонажу
- */
-
-
-UENUM(BlueprintType)
-enum class EEffectStatusType : uint8
-{
-	// Основные типы
-	PhysicalDamage		UMETA(DisplayName = "PhysicalDamage"), // Физический урон (рубящий, дробящий, колющий)
-	MagicalDamage		UMETA(DisplayName = "MagicalDamage"),  // Магический урон (универсальный магический тип)
-	TrueDamage			UMETA(DisplayName = "TrueDamage"), // Игнорирует броню и сопротивления
-
-	// Стихийный урон
-	FireDamage			UMETA(DisplayName = "FireDamage"),     // Огненный урон
-	IceDamage			UMETA(DisplayName = "IceDamage"),      // Ледяной урон
-	LightningDamage		UMETA(DisplayName = "LightningDamage"), // Электрический урон
-	PoisonDamage		UMETA(DisplayName = "PoisonDamage"),   // Ядовитый урон
-	BleedingDamage		UMETA(DisplayName = "BleedingDamage"),  // Кровотечение 
-	RadiantDamage		UMETA(DisplayName = "RadiantDamage"),  // Светлый урон
-	NecroticDamage      UMETA(DisplayName = "NecroticDamage"), // Некротический урон
-
-	// Урон по характеристикам
-	StaminaDamage		UMETA(DisplayName = "StaminaDamage"),  // Урон по стамине
-	ManaDamage			UMETA(DisplayName = "ManaDamage"),     // Урон по мане
-	ForceDamage			UMETA(DisplayName = "ForceDamage"),     // Урон физ. силе
-	MagicDamage			UMETA(DisplayName = "MagicDamage"),     // Урон маг. силе
-
-	// Положительные эффекты
-	ManaRecovery		UMETA(DisplayName = "ManaRecovery"),  // Восстановление маны
-	StaminaRecovery		UMETA(DisplayName = "StaminaRecovery"),  // Восстановление стамины
-	HealthRecovery		UMETA(DisplayName = "HealthRecovery"),  // Восстановление хп
-
-	ManaIncrease		UMETA(DisplayName = "ManaIncrease"),  // Повышение маны
-	StaminaIncrease		UMETA(DisplayName = "StaminaIncrease"),  // Повышение стамины
-	HealthIncrease		UMETA(DisplayName = "HealthIncrease"),  // Повышение хп
-
-};
-
-/**
- * @Структура, описывающая действие эффекта
- */
-
-USTRUCT(BlueprintType)
-struct INVENTORYSYSTEM_API FEffectStatus
-{
-	GENERATED_BODY()
-
-	public:
-		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Config", meta = (ToolTip = "Тип эффекта"))
-			EEffectStatusType EffectType;
-
-		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Config", meta = (ToolTip = "Вероятность вызвать эффект"))
-			float EffectProbability;
-
-		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Config", meta = (ToolTip = "Воздействие эффекта в секунду"))
-			float EffectPerSecond;
-
-		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Config", meta = (ToolTip = "Время эффекта"))
-			float EffectTime;
-
-		bool operator==(const FEffectStatus& Other) const
-		{
-			bool isTypeEqual = EffectType == Other.EffectType;
-			bool isProbabilityEqual = FMath::IsNearlyEqual(EffectProbability, Other.EffectProbability, 0.0001f);
-			bool isEffectPerSecondEqual = FMath::IsNearlyEqual(EffectPerSecond, Other.EffectPerSecond, 0.0001f);
-			bool isEffectTimeEqual = FMath::IsNearlyEqual(EffectTime, Other.EffectTime, 0.0001f);
-
-			return isTypeEqual && isProbabilityEqual && isEffectPerSecondEqual && isEffectTimeEqual;
-		}
-
-		bool operator!=(const FEffectStatus& Other) const
-		{
-			return !(*this == Other); 
-		}
-};
 
 /**
  * @Структура, описывающая улучшения экипировки (зачарования и ид)
@@ -174,13 +99,13 @@ public:
 		FText UpgradeDescription;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Effects", meta = (ToolTip = "Пассивные эффекты (при экипировке)"))
-		TArray<FEffectStatus> UpgradePassiveEffects;
+		TArray<FEffectAbstract> UpgradePassiveEffects;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Effects", meta = (ToolTip = "Активные эффекты на ЦЕЛЬ (при использовании, атаке)"))
-		TArray<FEffectStatus> UpgradeActiveTargetEffects;
+		TArray<FEffectAbstract> UpgradeActiveTargetEffects;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Effects", meta = (ToolTip = "Активные эффекты на СЕБЯ (при использовании, атаке)"))
-		TArray<FEffectStatus> UpgradeActiveSelfEffects;
+		TArray<FEffectAbstract> UpgradeActiveSelfEffects;
 };
 
 
@@ -227,13 +152,13 @@ struct INVENTORYSYSTEM_API FItemAbstract: public FTableRowBase
 
 
 		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Effects", meta = (ToolTip = "Пассивные эффекты (при экипировке)"))
-			TArray<FEffectStatus> ItemPassiveEffects;
+			TArray<FEffectAbstract> ItemPassiveEffects;
 
 		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Effects", meta = (ToolTip = "Активные эффекты на ЦЕЛЬ (при использовании, атаке)"))
-			TArray<FEffectStatus> ItemActiveTargetEffects;
+			TArray<FEffectAbstract> ItemActiveTargetEffects;
 
 		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Effects", meta = (ToolTip = "Активные эффекты на СЕБЯ (при использовании, атаке)"))
-			TArray<FEffectStatus> ItemActiveSelfEffects;
+			TArray<FEffectAbstract> ItemActiveSelfEffects;
 
 		UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Effects", meta = (ToolTip = "Улучшения на предмете"))
 			TArray<FEquipmetUpgrades> ItemUpgrades;

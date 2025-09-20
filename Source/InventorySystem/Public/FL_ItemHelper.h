@@ -39,7 +39,7 @@ class INVENTORYSYSTEM_API UFL_ItemHelper : public UBlueprintFunctionLibrary
 			static bool ItemIsUpgraded(const FItemAbstract& Item, TArray<FEquipmetUpgrades>& ItemUpgrades);
 
 		UFUNCTION(BlueprintCallable, BlueprintPure, Category = "ItemsHelper", meta = (ToolTip = "Эквивалентны ли массивы эффектов"))
-			static bool ItemEffectsIsIqual(const TArray<FEffectStatus>& FirstEffects, const TArray<FEffectStatus>& SecondEffects);
+			static bool ItemEffectsIsIqual(const TArray<FEffectAbstract>& FirstEffects, const TArray<FEffectAbstract>& SecondEffects);
 
 		UFUNCTION(BlueprintCallable, Category = "ItemsHelper", meta = (ToolTip = "Получить предмет из базы данных по ИД", ExpandEnumAsExecs = "OutResult"))
 			static void GetItemByID(const int ID, const UDA_Item* ItemsDA, EExecResult& OutResult, FItemAbstract& Item);
